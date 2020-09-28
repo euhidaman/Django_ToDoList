@@ -18,7 +18,9 @@
                  <li class="list-group-item">
                      {{ todo_item.text }}
                      <div class="float-right">
-                        <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+                         <form action="delete_todo/{{ todo_item.id }}/" method="post">
+                           <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                         </form>
                      </div>
                  </li>
 
