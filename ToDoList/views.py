@@ -24,4 +24,5 @@ def add_todo(request):
 # here todo_id, is the id of the field in the database to be deleted, as passed from the index.html form
 @csrf_exempt
 def delete_todo(request, todo_id):
+    ToDo.objects.get(id=todo_id).delete()
     return HttpResponseRedirect('/ToDoList/')
