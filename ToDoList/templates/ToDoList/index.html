@@ -1,31 +1,41 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="row mt-4">
+  <div class="col">
+    <h2>Add Item</h2>
+    <form action="add_todo/" method="post" class="form-inline">
+      <input
+        type="text"
+        class="form-control mb-2 mr-sm-2"
+        name="content"
+        placeholder="type here..."
+      />
+      <button type="submit" class="btn btn-success mb-2">Submit</button>
+    </form>
+  </div>
+</div>
 
-{% block content %}
-    <div class="row mt-4">
-        <div class="col">
-            <h2>Add Item</h2>
-            <form action="add_todo/" method="post" class="form-inline">
-                <input type="text" class="form-control mb-2 mr-sm-2" name="content" placeholder="type here...">
-                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+<div class="row mt-4">
+  <div class="col">
+    <ul class="list-group">
+      {% for todo_item in todo_items %}
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col"><b>{{ todo_item.text }}</b></div>
+          <div class="col">
+            <span class="badge badge-primary badge-pill mx-auto"
+              >{{todo_item.added_date}}</span
+            >
+          </div>
+          <div class="float-right">
+            <form action="delete_todo/{{ todo_item.id }}/" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Delete</button>
             </form>
+          </div>
         </div>
-    </div>
-
-    <div class="row mt-4">
-       <div class="col">
-           <ul class="list-group">
-               {% for todo_item in todo_items %}
-                 <li class="list-group-item">
-                     {{ todo_item.text }}
-                     <div class="float-right">
-                         <form action="delete_todo/{{ todo_item.id }}/" method="post">
-                           <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                         </form>
-                     </div>
-                 </li>
-
-               {% endfor %}
-           </ul>
-       </div>
-    </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 {% endblock content %}
