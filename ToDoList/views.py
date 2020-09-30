@@ -1,5 +1,3 @@
-# App link ==> http://127.0.0.1:8000/ToDoList/
-
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
@@ -19,7 +17,7 @@ def add_todo(request):
     current_date = timezone.now()
     content = request.POST["content"]
     created_obj = ToDo.objects.create(added_date=current_date, text=content)
-    return HttpResponseRedirect('/ToDoList/')
+    return HttpResponseRedirect('/')
 
 # pathway, or flow ==>
 # goes from delete in form(index.html) --> urls.py --> delete_todo(request, todo_id) function
@@ -27,4 +25,4 @@ def add_todo(request):
 @csrf_exempt
 def delete_todo(request, todo_id):
     ToDo.objects.get(id=todo_id).delete()
-    return HttpResponseRedirect('/ToDoList/')
+    return HttpResponseRedirect('/')
